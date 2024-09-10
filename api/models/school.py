@@ -1,0 +1,18 @@
+from django.db import models
+
+# Create your models here.
+class School(models.Model):
+    school_name = models.CharField(max_length=100, null=False)
+    school_slogan = models.CharField(max_length=100)
+    school_address = models.CharField(max_length=100, null=False)
+    school_city = models.CharField(max_length=100)
+    school_state = models.CharField(max_length=100)
+    school_zip = models.IntegerField()
+    school_phone = models.CharField(max_length=100)
+    school_email = models.EmailField(null=False)
+    school_photo_logo = models.CharField(max_length=100)
+    school_users_admin = models.IntegerField()
+    school_users_operators = models.IntegerField()
+    
+    def __string__(self):
+        return self.school_name
