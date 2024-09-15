@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class School(models.Model):
     school_name = models.CharField(max_length=100, null=False)
     school_slogan = models.CharField(max_length=100)
