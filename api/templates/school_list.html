@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrolySchool</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Schools in Broly</h1>
+
+        <div class="text-end mb-3">
+            <a href="#add-school" class="btn btn-success">Add New School</a>
+        </div>
+
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>#ID</th>
+                    <th>School Name</th>
+                    <th>Location</th>
+                    <th>users admin</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Row for a School -->
+                {% for school in schools %}
+                <tr>
+                    <td>{{school.id}}</td>
+                    <td>{{school.school_name}}</td>
+                    <td>{{school.school_users_admin}}-{{school.school_city}}-{{school.school_state}}-{{school.school_zip}}  </td>
+                    <td>{{school.school_address}}</td>
+                    <td>
+                        {% if school.school_subsidiaries == True %}    
+                            <button class="btn btn-light" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#{{school.id}}" aria-expanded="false" aria-controls="{{school.id}}"
+                            >
+                                <i class="bi bi-list"></i> Toggle Subsidiaries
+                            </button>
+                        {% endif %}    
+                        <button class="btn btn-primary">
+                            <i class="bi bi-eye-fill"></i>
+                        </button> 
+                        <a href="#delete-school" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                <tr class="collapse" id="{{school.id}}">
+                    <td colspan="5">
+                        <div>
+                            <table class="table table-sm table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Sub-School</th>
+                                        <th>Location</th>
+                                        <th>Established</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Green Valley Branch 1</td>
+                                        <td>Brooklyn</td>
+                                        <td>2005</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                {% endfor %}
+                <!-- Sub-Elements for the School -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (for collapse functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
