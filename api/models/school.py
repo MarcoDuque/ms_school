@@ -12,6 +12,7 @@ class School(models.Model):
     school_photo_logo = models.ImageField(upload_to='media/', default="media/no_img.jpg", null=True)
     school_users_admin = models.IntegerField()
     school_users_operators = models.IntegerField()
+    school_subsidiaries = models.BooleanField(default=False)
     
     def __string__(self):
         return self.school_name
