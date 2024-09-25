@@ -14,13 +14,13 @@
         <h1 class="text-center">Schools in Broly</h1>
 
         <div class="text-end mb-3">
-            <a href="#add-school" class="btn btn-success">Add New School</a>
+            <a href="#add-school" class="btn btn-success">Add School</a>
         </div>
 
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>#ID</th>
+                    <th>Id</th>
                     <th>School Name</th>
                     <th>Location</th>
                     <th>users admin</th>
@@ -28,52 +28,64 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Example Row for a School -->
-                {% for school in schools %}
-                <tr>
-                    <td>{{school.id}}</td>
-                    <td>{{school.school_name}}</td>
-                    <td>{{school.school_users_admin}}-{{school.school_city}}-{{school.school_state}}-{{school.school_zip}}  </td>
-                    <td>{{school.school_address}}</td>
-                    <td>
-                        {% if school.school_subsidiaries == True %}    
-                            <button class="btn btn-light" type="button" data-bs-toggle="collapse" 
-                            data-bs-target="#{{school.id}}" aria-expanded="false" aria-controls="{{school.id}}"
-                            >
-                                <i class="bi bi-list"></i> Toggle Subsidiaries
-                            </button>
-                        {% endif %}    
-                        <button class="btn btn-primary">
-                            <i class="bi bi-eye-fill"></i>
-                        </button> 
-                        <a href="#delete-school" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                <tr class="collapse" id="{{school.id}}">
-                    <td colspan="5">
-                        <div>
-                            <table class="table table-sm table-bordered">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Sub-School</th>
-                                        <th>Location</th>
-                                        <th>Established</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Green Valley Branch 1</td>
-                                        <td>Brooklyn</td>
-                                        <td>2005</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                {% endfor %}
-                <!-- Sub-Elements for the School -->
-                </tr>
-            </tbody>
+                {% for school in school %}
+                    {% if school.school_active == True %}
+                        <tr>
+                            <td>{{school.id}}</td>
+                            <td>{{school.school_name}}</td>
+                            <td>{{school.school_state}}-{{school.school_zip}}</td>
+                            <td>{{school.school_address}}</td>
+                            <td>
+                                {% if school.school_subsidiaries == True %}    
+                                    <button class="btn btn-light" data-bs-toggle="collapse" 
+                                    data-bs-target="#{{school.id}}" aria-expanded="false"
+                                    aria-controls="{{school.id}}"
+                                    >
+                                        <i class="bi bi-list"></i>
+                                    </button>
+                                {% endif %}  
+                                <button class="btn btn-primary">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                                <a href="#delete-school" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr class="collapse" id="{{school.id}}">
+                            <td colspan="5">
+                                <div>
+                                    <table class="table table-sm table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Sub-School</th>
+                                                <th>Adress</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        {% for subsidiary in subsidiary %}
+                                            {% if subsidiary.School.id == school.id %}
+                                                <tbody> 
+                                                    <td> {{subsidiary.subsidiary_name}} </td>
+                                                    <td> {{subsidiary.subsidiary_name}} </td>
+                                                    <td>
+                                                        <button class="btn btn-primary">
+                                                            <i class="bi bi-eye-fill"></i>
+                                                        </button> 
+                                                        <a href="#delete-school" class="btn btn-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tbody>        
+                                            {% endif %}
+                                        {% endfor %}                
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %} 
+                {% endfor %}    
+            </tbody>    
         </table>
     </div>
 

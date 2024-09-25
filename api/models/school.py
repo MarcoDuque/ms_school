@@ -13,6 +13,7 @@ class School(models.Model):
     school_users_admin = models.IntegerField()
     school_users_operators = models.IntegerField()
     school_subsidiaries = models.BooleanField(default=False)
+    school_active = models.BooleanField(default=True, null=False)
     
     def __string__(self):
         return self.school_name
